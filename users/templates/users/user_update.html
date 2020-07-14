@@ -1,0 +1,38 @@
+{% extends 'recipe/base.html' %}
+{% block content %}
+<style>
+    input[type='text'], input[type="email"], input[type="file"]{
+        border: none;
+        border-bottom: 2px solid #9DC5BB;
+        outline: none;
+        box-shadow: none;
+        width: 70%;
+    }
+    input[type="text"]:focus, input[type='email']:focus, input[type="file"]:focus{
+        border: none;
+        border-bottom: 3px solid #29514D;
+        outline: none;
+    }
+    label{
+        color: #29514D;
+    }
+    a{color: #129171;}
+    a:hover{color: #129171;}
+</style>
+<div class="content-section center border_all_around" style="width: 35%;">
+    <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset>
+                <h1 style="text-align: center;color: #29514D;">Update Profile</h1>
+                <div style="margin-top: 50px;">
+                    {{ u_form.as_p }}
+                    {{ p_form.as_p }}
+                </div>
+            </fieldset>
+            <div>
+                <button class="button button2" type="submit">Save Changes</button>
+            </div>
+        </form>
+</div>
+
+{% endblock content %}

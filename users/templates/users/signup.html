@@ -1,0 +1,31 @@
+{% extends "recipe/base.html" %}
+{% block content %}
+<div class="border_all_around content-section center" >
+    <div style="text-align: center;">
+        <form method="post" class="w3-container" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <h1 class="border-bottom mb-4" style="color: #29514D; text-align: center;">Sign Up</h1>
+                {% for field in user_form %}
+                <div class="form-inline form-group" style="margin: 5px;">
+                    <label style="color: #29514D;">{{ field.label_tag }}</label>
+                    <input style="border: none; border-bottom: 1px solid #5E807F; outline: none; box-shadow: none;  margin-left:10px;"
+                           class="w3-input form-control" id="{{ field.id_for_label }}"
+                           name="{{ field.html_name }}" type="{{ field.field.widget.input_type }}">
+                    <small>{{field.errors}}</small>
+                </div>
+                {% endfor %}
+            </fieldset>
+            <div class="form-group">
+                <button class="button button2" type="submit">Sign up</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted" style="color: #5E807F">
+                Already have an account? Login here:<a class="ml-2" style="color: #16B68E;" href="{% url 'login' %}">Login</a>
+            </small>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

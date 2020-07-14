@@ -1,0 +1,78 @@
+{% extends 'recipe/base.html' %}
+{% block content %}
+{% load static %}
+<style>
+.row {
+  display: flex;
+}
+.col {
+  flex: 1;
+}
+#logo{
+    display: block;
+    margin:auto;
+    box-shadow: 0 0 50px #5E807F;
+    border-radius: 40px;
+}
+#info{
+    display: inline-block;
+    width: 45vw;
+    vertical-align: top;
+    padding:30px;
+    margin:20px;
+}
+#steps{
+    display: inline-block;
+    width: 45vw;
+    vertical-align: top;
+    padding:30px;
+    margin:20px;
+}
+h1{
+    margin-bottom: 15px;
+    text-align: center;
+    color: #29514D;
+}
+h2{
+    text-align: left;
+    color: #29514D;
+}
+h3{
+    text-align: left;
+    color: #29514D;
+}
+
+</style>
+<h1>{{ recipe.name }}</h1>
+<div class="row">
+    <div class="border_all_around col" id="info">
+        <h2>Recipe Details</h2>
+        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+            <img src="{% static 'recipe/time.png' %}" alt="logo" style="margin-right: 10px; height:20px; width:20px;">
+            <span>{{ recipe.duration }}</span>
+        </div>
+
+        <div>
+            <h3>Ingredients</h3>
+            {{ recipe.ingredients|linebreaks }}
+            <img id="logo" src="{{ recipe.image.url }}">
+        </div>
+    </div>
+    <div id="steps" class="border_all_around col" id="steps">
+        <h2>Preparation</h2>
+        {{ recipe.preparation|linebreaks }}
+    </div>
+</div>
+
+{% if user == recipe.author %}
+<div style="margin-bottom: 45px;">
+    <div class="button button2">
+        <a style="color:#2D4D45;" href="{% url 'update' recipe.id %}">Update</a>
+    </div>
+    <div class="button button2" style="background-color: #2D4D45;">
+        <a style="color: #9DC5BB;" href="{% url 'delete' recipe.id %}">Delete</a>
+    </div>
+</div>
+{% endif %}
+
+{% endblock content %}

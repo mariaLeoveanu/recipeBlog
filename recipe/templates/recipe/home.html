@@ -1,0 +1,57 @@
+{% extends 'recipe/base.html' %}
+{% block content %}
+<style>
+small a{color: #129171;}
+small a:hover{color: #129171;}
+small{color: #5E807F;}
+p a{color: #129171;}
+p a:hover{color: #129171;}
+h1 a{color: #000000;}
+h1 a:hover{color: #29514D;}
+.pag-btn{
+    background-color: #129171;
+    color: #DDE4E4;
+    border: #129171;
+}
+.pag-btn:hover{
+     background-color: #DDE4E4;
+     color: #129171;
+     border: #DDE4E4;
+}
+</style>
+<div class="content">
+    {% for recipe in recipes %}
+        <div class="border_round">
+            <div class="article-metadata">
+                <small>Posted by <a class="pr-2" href="{% url 'user_profile' recipe.author.profile.id %}">{{ recipe.author }}</a></small>
+                <small>{{ recipe.date_posted | date:"G:i F j, Y" }}</small>
+            </div>
+            <p><a href="{% url 'recipe_type' recipe.type %}">{{recipe.type}}</a></p>
+            <h1><a href="{% url 'details' recipe.id %}" style="">{{recipe.name}}</a></h1>
+            <p class="article-content">{{recipe.overview | safe | truncatewords:"50"}}</p>
+        </div>
+{% endfor %}
+</div>
+
+<div style="text-align: center;">
+    {% if is_paginated %}
+{% if page_obj.has_previous %}
+<a class="btn btn-outline-info mb-4 pag-btn" href="?page=1">First</a>
+<a class="btn btn-outline-info mb-4 pag-btn" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+{% endif %}
+{% for num in page_obj.paginator.page_range %}
+{% if page_obj.number == num %}
+<a class="btn btn-info mb-4 pag-btn" href="?page={{ num }}">{{ num }}</a>
+{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+<a class="btn btn-outline-info mb-4 pag-btn" href="?page={{ num }}">{{ num }}</a>
+{% endif %}
+{% endfor %}
+{% if page_obj.has_next %}
+<a class="btn btn-outline-info mb-4 pag-btn" href="?page={{ page_obj.next_page_number }}">Next</a>
+<a class="btn btn-outline-info mb-4 pag-btn" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+{% endif %}
+{% endif %}
+
+</div>
+
+{% endblock content %}

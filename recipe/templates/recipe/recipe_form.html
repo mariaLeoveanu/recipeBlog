@@ -1,0 +1,77 @@
+{% extends 'recipe/base.html' %}
+{% block content %}
+<style>
+
+textarea{
+    border: 2px solid #9DC5BB;
+    border-radius: 40px;
+}
+textarea:focus{
+    border: 3px solid #29514D;
+    border-radius: 40px;
+    outline: none;
+}
+input[type="text"]{
+    border: none;
+    border-bottom: 2px solid #9DC5BB;
+    outline: none;
+    box-shadow: none;
+}
+input[type="text"]:focus{
+    border: none;
+    border-bottom: 3px solid #29514D;
+    outline: none;
+
+}
+input[type="file"]:focus{
+    border: none;
+    border-bottom: 3px solid #29514D;
+    outline: none;
+}
+#id_type{
+    border: 2px solid #9DC5BB;
+    border-radius: 40px;
+    padding: 3px;
+}
+#id_type:focus{
+    border: 3px solid #29514D;
+    border-radius: 40px;
+    padding: 3px;
+    outline: none;
+}
+#id_image{
+    border: none;
+    border-bottom: 2px solid #9DC5BB;
+    outline: none;
+    box-shadow: none;
+}
+#id_image:focus{
+    border: none;
+    border-bottom: 3px solid #29514D;
+    outline: none;
+    box-shadow: none;
+}
+
+</style>
+
+<div class="content-section center border_all_around" style="width:80%; margin-top:520px;">
+        <form method="POST" class="w3-container" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <h1 class="border-bottom mb-4" style="color: #29514D; text-align: center;">New Recipe</h1>
+                {% for field in form %}
+                <div class="form-group" style="margin: 5px;">
+                    <label style="color: #29514D;">{{ field.label_tag }}</label>
+                    <div>{{field}}</div>
+                    <small>{{field.errors}}</small>
+                </div>
+                {% endfor %}
+            </fieldset>
+            <div class="form-group">
+                <button style="outline: none;" class="button button2" type="submit">Post recipe</button>
+            </div>
+        </form>
+
+
+</div>
+{% endblock content %}

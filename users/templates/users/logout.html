@@ -1,0 +1,15 @@
+{% extends "recipe/base.html" %}
+{% block content %}
+<div class="border_all_around center">
+    <h2 style="text-align: center;">You have been logged out!</h2>
+    <div class="border-top pt-3" style="text-align: center;">
+        <button class="button button2" >
+            <a class="ml-2" href="{% url 'login' %}" style="color:#2D4D45;">Login again</a>
+        </button>
+        <button class="button button2">
+           <a class="ml-2" href="{% url 'signup' %}" style="color:#2D4D45;"> Sign Up</a>
+        </button>
+    </div>
+</div>
+
+{% endblock content %}
